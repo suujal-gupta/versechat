@@ -1,9 +1,11 @@
 const KEY = 'versechat_token';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000';
+
 export const getToken = () => localStorage.getItem(KEY);
 export const setToken = t => (t ? localStorage.setItem(KEY, t) : localStorage.removeItem(KEY));
 
 async function req(path, { method = 'GET', body, raw, headers = {} } = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(API_BASE + path, {
     method,
     headers: {
       ...(body ? { 'Content-Type': 'application/json' } : {}),

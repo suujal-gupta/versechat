@@ -50,11 +50,12 @@ export default function Chat({ me, setMe, onSignOut }) {
   const callState = useCall({ sock: socket, nameOf, flash });
 
   /* ---- initial load + socket ---- */
-  useEffect(() => {
+    useEffect(() => {
     api.users().then(r => setUsers(r.users));
     api.conversations().then(r => setConvs(r.conversations));
 
-    const s = io({ auth: { token: getToken() } });
+    const apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:3000';
+    const s = io(apiBase, { auth: { token: getToken() } });
     sock.current = s;
     setSocket(s);
     s.on('connect', () => setConnected(true));
