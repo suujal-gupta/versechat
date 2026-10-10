@@ -26,6 +26,14 @@ const SECRET = process.env.JWT_SECRET ||
 
 const uid = () => crypto.randomBytes(8).toString('hex');
 const app = express();
+   // Allow Vercel frontend to connect
+   app.use((req, res, next) => {
+     res.header('Access-Control-Allow-Origin', '*');
+     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+     if (req.method === 'OPTIONS') return res.sendStatus(200);
+     next();
+   });
 const server = http.createServer(app);
 const IO_OPTS = { maxHttpBufferSize: 1e6, serveClient: false };
 const io = new Server(server, IO_OPTS);
