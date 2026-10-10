@@ -1,0 +1,16 @@
+{
+  "name": "versechat-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "selfsigned": "^2.4.1",
+    "socket.io": "^4.7.5"
+  }
+}
